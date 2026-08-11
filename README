@@ -1,0 +1,132 @@
+# Peso Command Center
+
+A private personal finance tracker in Philippine Peso. One HTML file, no server,
+no account. Everything you enter is saved on your own device and never uploaded.
+
+**Live site:** `https://YOUR-USERNAME.github.io/peso-command-center/`
+*(replace with your own once Pages is switched on)*
+
+---
+
+## Publishing this on GitHub Pages
+
+You do not need Git installed. The browser upload route works fine.
+
+### 1. Create the repository
+
+1. Go to **github.com** and sign in.
+2. Click **+** (top right) → **New repository**.
+3. Repository name: `peso-command-center`
+4. Set it to **Public**. GitHub Pages is free only for public repositories.
+5. Do **not** tick "Add a README" — the files you are uploading include one.
+6. Click **Create repository**.
+
+### 2. Upload the files
+
+On the empty repository page, click **uploading an existing file**.
+
+Drag in the **contents** of this folder, not the folder itself:
+
+```
+index.html
+manifest.webmanifest
+sw.js
+icon-180.png
+icon-192.png
+icon-512.png
+icon-maskable-512.png
+.nojekyll
+README.md
+```
+
+> `.nojekyll` is hidden on macOS and Linux. Press **Cmd+Shift+.** (Mac) or turn on
+> **Show hidden files** (Windows) before dragging, or upload it separately. Without
+> it GitHub runs Jekyll over the folder, which can skip files unexpectedly.
+
+Scroll down and click **Commit changes**.
+
+### 3. Turn on Pages
+
+1. In the repository, click **Settings**.
+2. In the left sidebar, click **Pages**.
+3. Under **Source**, choose **Deploy from a branch**.
+4. Branch: **main**, folder: **/ (root)**.
+5. Click **Save**.
+
+Wait about a minute, then refresh. GitHub shows the live address at the top:
+
+```
+https://YOUR-USERNAME.github.io/peso-command-center/
+```
+
+### 4. Install it on your phone
+
+Open that address on your phone.
+
+**iPhone / iPad** — must be Safari, not Chrome:
+Share button → **Add to Home Screen** → **Add**.
+
+**Android** — Chrome:
+**⋮** menu → **Install app** → confirm.
+
+You now have an icon on your home screen. It opens full screen, works with no
+signal, and keeps your records between sessions.
+
+> **iPhone owners:** install it the same day you start entering data. Until a site
+> is on the home screen, iOS clears its saved data after roughly a week of not
+> opening it. Once installed, that rule no longer applies.
+
+---
+
+## Updating it later
+
+Repository → click `index.html` → pencil icon → paste the new version → **Commit
+changes**. Live in about a minute.
+
+If you change `index.html`, also open `sw.js` and bump the version:
+
+```js
+const CACHE = "pcc-v1";   →   const CACHE = "pcc-v2";
+```
+
+The service worker caches the app for offline use. Without a new cache name,
+phones keep serving the old copy.
+
+---
+
+## What this does and does not do
+
+**Does**
+
+- Six pillars: Income, Savings, Spending, Expenditure, Investment, Protection
+- Monthly budget planner with pace tracking through the month
+- Dashboard, transactions, goals, reports, charts, financial health indicator
+- Saves automatically to your device (IndexedDB, mirrored to local storage)
+- Works offline once installed
+- JSON backup and restore, CSV export and import
+
+**Does not**
+
+- No accounts, no sign-in, no password
+- No sync between devices — a phone and a laptop keep separate records
+- Nothing is uploaded anywhere, including to GitHub
+
+Anyone who visits the URL gets their own empty copy. They cannot see your data,
+because your data never leaves your device. But equally, **your data is not backed
+up anywhere.** Use Settings → *Download a backup (.json)* every so often. That file
+is the only copy that survives a lost phone, and the only way to move your history
+to a new device.
+
+---
+
+## Why the multi-user version cannot go here
+
+There is a second version of this project built on Next.js and Supabase, with real
+accounts and a PostgreSQL database. GitHub Pages cannot host it.
+
+Pages serves static files only. It cannot run the server-side code that checks who
+you are, refreshes your session, or talks to a database. Uploading that version here
+would produce a sign-in form that cannot sign anybody in.
+
+That version needs a host that runs server code — Vercel, Netlify, Cloudflare Pages
+with Workers, Railway, Render or Fly.io. Its own README has the full walkthrough.
